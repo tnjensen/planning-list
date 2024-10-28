@@ -10,7 +10,7 @@ const allPlayers = [
 type Work = {
     composer: "",
     title: "", 
-    players: ""
+    players: string[]
 }
 export const Checkbox = ({isChecked, label, checkHandler, index}) => {
     const [checked, setChecked] = useState(
@@ -33,7 +33,7 @@ export default function Players (){
     const [updatedWork, setUpdatedWork] = useState<Work>({
         composer: "",
         title: "", 
-        players: ""
+        players: []
     });
     const checkedPlayers = [];
 
