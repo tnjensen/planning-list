@@ -7,15 +7,7 @@ const allPlayers = [
     {name: "Rik", checked: false}
 ]; 
 
-type Work = {
-    composer: "",
-    title: "", 
-    players: string[]
-}
 export const Checkbox = ({isChecked, label, checkHandler, index}) => {
-    const [checked, setChecked] = useState(
-        new Array(allPlayers.length).fill(false)
-    );
     
   return (
     <div>
@@ -30,11 +22,7 @@ export const Checkbox = ({isChecked, label, checkHandler, index}) => {
 
 export default function Players (){
     const [players, setPlayers] = useState(allPlayers);
-    const [updatedWork, setUpdatedWork] = useState<Work>({
-        composer: "",
-        title: "", 
-        players: []
-    });
+    
     const checkedPlayers = [];
 
     const updateCheckStatus = index => {

@@ -1,26 +1,22 @@
-import { useEffect, useState } from 'react'
-import './edit.scss'
+import { useEffect, useState } from 'react';
+import './edit.scss';
 import axios from 'axios';
 import {useNavigate, useParams } from 'react-router-dom';
 
 export default function Edit() {
     const [currentWork, setCurrentWork] = useState({composer: "", title: ""});
-    const [updatedWork, setUpdatedWork] = useState({
-        composer: "",
-        title: ""
-    });
     const navigate = useNavigate();
     const {id} = useParams();
 
     const handleChange = (e) =>{
         
-       setUpdatedWork((prev) =>({...prev, [e.target.name]: e.target.value}));
+       setCurrentWork((prev) =>({...prev, [e.target.name]: e.target.value}));
     }
     const updateWork = async (e) => {
         e.preventDefault();
         
         try{
-            await axios.put("http://localhost:8082/works/" + id, updatedWork);
+            await axios.put("http://localhost:8082/works/" + id, currentWork);
             navigate("/");
         }
         catch(err){

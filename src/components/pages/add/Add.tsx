@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './add.scss'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +15,7 @@ type Work = {
     title: "",
     players: string[]
 }
+
 export default function Add() {
     const [players, setPlayers] = useState(allPlayers);
     const [work, setWork] = useState<Work>({
@@ -35,20 +36,19 @@ export default function Add() {
     }
     const navigate = useNavigate();
     
-    /* useEffect(() => { */
+    useEffect(() => {
         const checkedPlayers = players.filter(player => player.checked === true);
         const checkedPlayersName = checkedPlayers.map((player) =>{
            return player.name
         })
         
         console.log(checkedPlayersName)
-   /*  }) */
+    })
 
     const handleChange = (e) =>{
-        
-        setWork((prev) =>({...prev, [e.target.name]: e.target.value}));
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        setWork((prev) =>({...prev, [e.target.name]: value}));
        
-        
         console.log(e)
     }
     const addWork = async (e) => {
@@ -65,14 +65,19 @@ export default function Add() {
         }
     }
     
-
-  return (
+    return (
         <div className='add'>
             <h3>Add Work</h3>
             <form className='add-form'>
                 <input type='text' placeholder='Composer' onChange={handleChange} name='composer' />
                 <input type='text' placeholder='Title' onChange={handleChange} name='title' />
-                <Players />
+                
+                {players.map((player) => (
+                    <div className='players'>
+                        <input type='checkbox' name={player.name} onChange={handleChange} />
+                        <label htmlFor={player.name}>{player.name}</label>
+                    </div>
+                ))}
                 <button type='submit' className='add-button' onClick={addWork}>
                     Add
                 </button>
