@@ -1,0 +1,15 @@
+@import '../../App.scss';
+
+.wrapper{
+    background-color: aliceblue;
+    min-height: 100vh;
+    padding: 1rem;
+
+    .main{
+        min-height: 100vh;
+
+        input, button{
+            border-radius: 5px;
+          }
+    }
+}

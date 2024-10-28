@@ -1,0 +1,68 @@
+.programme{
+    margin-bottom: 20px;
+
+    .card{
+        display: flex;
+        justify-content: center;
+        border: 1px #0af solid;
+        border-radius: 5px;
+        margin: 5px;
+        background-color: #efefef;
+        padding: 1.5rem;
+        position: relative;
+
+        .edit-button{
+            width: 80px;
+            font-size: .8rem;
+            font-weight: 600;
+            padding: 5px;
+            text-transform: uppercase;
+            background-color: #0af;
+            color: #fffefe;
+            border: 1px solid #0af;
+            cursor: pointer;
+            
+            &:hover{
+                background-color: white;
+
+                a{
+                    color: #0af;
+                }
+                
+            }
+
+            a{
+                color: #fffefe;
+                text-decoration: none;
+               
+            }
+           
+        }
+        .delete-button{
+            width: 80px;
+            font-size: .8rem;
+            font-weight: 600;
+            padding: 5px;
+            text-transform: uppercase;
+            background-color: #c922c9;
+            color: #fffefe;
+            border: 1px solid #c922c9;
+            cursor: pointer;
+    
+            &:hover{
+                background-color: white;
+                color: #c922c9;
+            }
+        }
+        .buttons{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: flex-end;
+            position: absolute;
+            right: 10px;
+            padding: 5px;
+            
+        }
+    }
+}

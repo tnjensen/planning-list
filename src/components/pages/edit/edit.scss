@@ -1,0 +1,25 @@
+.edit{
+    
+    .edit-form{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    input[type="text"]{
+        padding: 10px;
+        border: 1px solid #707070;
+    }
+    .edit-button{
+        padding: 10px 15px;
+        text-transform: uppercase;
+        background-color: #33f799;
+        border: 1px solid #707070;
+        cursor: pointer;
+
+        &:hover{
+            background-color: #707070;
+            color: #33f799;
+        }
+    }
+    
+}

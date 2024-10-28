@@ -1,0 +1,11 @@
+.footer{
+    display: flex;
+    justify-content: space-around;
+    min-height: 70px;
+
+    .footer-social{
+        display: flex;
+        gap:10px;
+        font-size: 1.2rem;
+    }
+}
