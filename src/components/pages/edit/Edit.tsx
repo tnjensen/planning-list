@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import './edit.scss'
 import axios from 'axios';
 import {useNavigate, useParams } from 'react-router-dom';
-import Players from '../../players/Players';
 
 export default function Edit() {
     const [currentWork, setCurrentWork] = useState({composer: "", title: ""});

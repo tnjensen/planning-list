@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './add.scss'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Players from '../../players/Players';
 
 const allPlayers = [
     {name: "Thomas", checked: false},
@@ -13,19 +14,6 @@ type Work = {
     composer: "",
     title: "",
     players: string[]
-}
-
-const Checkbox = ({isChecked, label, checkHandler, index}) => {
-   
-    return (
-      <div>
-          <input type="checkbox" id={`checkbox-${index}`}
-          checked={isChecked}
-          onChange={checkHandler}
-          />
-          <label htmlFor={`checkbox-${index}`}>{label}</label>
-      </div>
-    )
 }
 export default function Add() {
     const [players, setPlayers] = useState(allPlayers);
@@ -84,28 +72,7 @@ export default function Add() {
             <form className='add-form'>
                 <input type='text' placeholder='Composer' onChange={handleChange} name='composer' />
                 <input type='text' placeholder='Title' onChange={handleChange} name='title' />
-                {/* {players.map((player, index) => (
-                    <div className='players'>
-                        <Checkbox key={player.name}
-                            isChecked={player.checked}
-                            checkHandler={() => updateCheckStatus(index)}
-                            label={player.name}
-                            index={index}
-                         />
-                    </div>
-                ))} */}
-                {/* {players.map((player, index) => (
-                    <div className='players'>
-                        <input type='checkbox' key={player.name}
-                            checked={player.checked}
-                            onChange={() => updateCheckStatus(index)}
-                            name={player.name}
-                            id={`${index}`}
-                         />
-                         <label htmlFor={`${index}`}>{player.name}</label>
-                    </div>
-                ))} */}
-                
+                <Players />
                 <button type='submit' className='add-button' onClick={addWork}>
                     Add
                 </button>

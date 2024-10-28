@@ -1,6 +1,5 @@
 import { useState } from "react"
 import './players.scss'
-import axios from "axios";
 
 const allPlayers = [
     {name: "Thomas", checked: false},
