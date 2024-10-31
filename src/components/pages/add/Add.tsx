@@ -13,52 +13,48 @@ const allPlayers = [
 type Work = {
     composer: "",
     title: "",
-    players: string[]
+    playing: string[]
 }
 
 export default function Add() {
     const [players, setPlayers] = useState(allPlayers);
     const [work, setWork] = useState<Work>({
-        composer: "",
-        title: "",
-        players: []
-    });
-    
-    const updateCheckStatus = index => {
-        
-        setPlayers(
-            players.map((player, currentIndex) =>
-            currentIndex === index
-        ? {...player, checked: !player.checked}
-        : player)
-        )
-        
-    }
+            composer: "",
+            title: "",
+            playing: []
+        }
+    );
+
     const navigate = useNavigate();
     
     useEffect(() => {
-        const checkedPlayers = players.filter(player => player.checked === true);
-        const checkedPlayersName = checkedPlayers.map((player) =>{
+        const checkedPlayers = players.filter(player => player.checked);
+        const checkedPlayersNames = checkedPlayers.map((player) =>{
            return player.name
         })
-        
-        console.log(checkedPlayersName)
-    })
+       
+        console.log(checkedPlayersNames)
+    },[players])
 
     const handleChange = (e) =>{
-        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        const newArray = [];
+        if(value === e.target.checked){
+            value = e.target.name;
+            newArray.push(value)
+        }
+        console.log(newArray)
+       /*  setWork({...work, playing: newArray}) */
         setWork((prev) =>({...prev, [e.target.name]: value}));
        
         console.log(e)
     }
     const addWork = async (e) => {
         e.preventDefault();
-       
         console.log(work)
-        
         try{
-            await axios.post("http://localhost:8082/works", work);
-            navigate("/");
+           /*  await axios.post("http://localhost:8082/works", work);
+            navigate("/"); */
         }
         catch(err){
             console.log(err);
