@@ -10,47 +10,36 @@ const allPlayers = [
     {name: "Rik", checked: false}
 ]; 
 
-type Work = {
-    composer: "",
-    title: "",
-    playing: string[]
-}
-
 export default function Add() {
+    const[composer, setComposer] = useState("");
+    const[title, setTitle] = useState("");
     const [players, setPlayers] = useState(allPlayers);
-    const [work, setWork] = useState<Work>({
-            composer: "",
-            title: "",
-            playing: []
-        }
-    );
+    const [work, setWork] = useState({
+        composer: "",
+        title: "",
+        playing: []
+    });
 
     const navigate = useNavigate();
     
-    useEffect(() => {
-        const checkedPlayers = players.filter(player => player.checked);
-        const checkedPlayersNames = checkedPlayers.map((player) =>{
-           return player.name
-        })
-       
-        console.log(checkedPlayersNames)
-    },[players])
-
+    const newArray = [];
     const handleChange = (e) =>{
-        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-        const newArray = [];
-        if(value === e.target.checked){
-            value = e.target.name;
-            newArray.push(value)
+        
+        if(e.target.checked){
+            const value = e.target.name;
+            newArray.push(value);
+        }else{
+            e.target.name = e.target.value
         }
-        console.log(newArray)
-       /*  setWork({...work, playing: newArray}) */
-        setWork((prev) =>({...prev, [e.target.name]: value}));
-       
-        console.log(e)
+      /* console.log(newArray)
+      console.log(composer)
+      console.log(title) */
+      setWork(work => ({...work, composer, title, playing:newArray}));
     }
+    
     const addWork = async (e) => {
         e.preventDefault();
+        
         console.log(work)
         try{
            /*  await axios.post("http://localhost:8082/works", work);
@@ -65,8 +54,8 @@ export default function Add() {
         <div className='add'>
             <h3>Add Work</h3>
             <form className='add-form'>
-                <input type='text' placeholder='Composer' onChange={handleChange} name='composer' />
-                <input type='text' placeholder='Title' onChange={handleChange} name='title' />
+                <input type='text' placeholder='Composer' onChange={e => setComposer(e.target.value)} name='composer' />
+                <input type='text' placeholder='Title' onChange={e => setTitle(e.target.value)} name='title' />
                 
                 {players.map((player) => (
                     <div className='players'>
@@ -78,7 +67,6 @@ export default function Add() {
                     Add
                 </button>
             </form>
-            
         </div>
   )
 }
