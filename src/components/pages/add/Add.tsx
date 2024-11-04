@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react'
 import './add.scss'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Players from '../../players/Players';
 
 const allPlayers = [
     {name: "Thomas", checked: false},
     {name: "Lars", checked: false},
     {name: "Rik", checked: false}
-]; 
+];
 
 export default function Add() {
     const[composer, setComposer] = useState("");
     const[title, setTitle] = useState("");
     const [players, setPlayers] = useState(allPlayers);
+    const [checkedPlayers, setCheckedPlayers] = useState([]);
     const [work, setWork] = useState({
         composer: "",
         title: "",
@@ -21,20 +21,15 @@ export default function Add() {
     });
 
     const navigate = useNavigate();
-    
-    const newArray = [];
+
     const handleChange = (e) =>{
         
         if(e.target.checked){
             const value = e.target.name;
+            const newArray = [...checkedPlayers];
             newArray.push(value);
-        }else{
-            e.target.name = e.target.value
+            setCheckedPlayers([newArray.join(",")])
         }
-      /* console.log(newArray)
-      console.log(composer)
-      console.log(title) */
-      setWork(work => ({...work, composer, title, playing:newArray}));
     }
     
     const addWork = async (e) => {
@@ -42,13 +37,16 @@ export default function Add() {
         
         console.log(work)
         try{
-           /*  await axios.post("http://localhost:8082/works", work);
-            navigate("/"); */
+            await axios.post("http://localhost:8082/works", work);
+            navigate("/");
         }
         catch(err){
             console.log(err);
         }
     }
+      useEffect(() => {
+        setWork(work => ({...work,composer, title, playing:checkedPlayers }))
+    },[composer, title, checkedPlayers])
     
     return (
         <div className='add'>

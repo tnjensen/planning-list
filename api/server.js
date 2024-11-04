@@ -61,12 +61,13 @@ app.put("/works/:id", (req,res) =>{
 
 
 app.post("/works", (req,res) => {
-    const q = "INSERT INTO works (`composer`,`title`) VALUES (?)"
+    const q = "INSERT INTO works (`composer`,`title`, `players` ) VALUES (?)"
     /* const values = ["title from backend","desc from backend", "cover picture from backend" ] */
 
     const values = [
         req.body.composer,
-        req.body.title
+        req.body.title,
+        req.body.playing
      ]
 
     db.query(q,[values], (err,data) =>{
